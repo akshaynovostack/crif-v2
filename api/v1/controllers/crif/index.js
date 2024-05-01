@@ -79,12 +79,12 @@ exports.getReport = async (req, res, next) => {
 
                 if (!orderId) {
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { order_id: orderId, status: bureauStatus['failed'], access_code: accessCode, report_id: reportId })//Update the status ;
-                    return ResHelper.apiResponse(res, false, "Kindly initiate the transaction again.", 403, {}, "")
+                    return ResHelper.apiResponse(res, false, "Kindly initiate the transaction again.", 403, { status: 'failed', data: initiateOrder.data }, "")
                 }; // If no transaction found
 
                 await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { report_id: reportId, status: bureauStatus['authenticated'] }); //Set the status as initiated and save the report id 
 
-                if (status !== "S06") { return ResHelper.apiResponse(res, false, crifStatus[status], 403, { ...user }, ""); }// Request is accepted by Bureau
+                if (status !== "S06") { return ResHelper.apiResponse(res, false, crifStatus[status], 403, { status: 'authenticated', data: initiateOrder.data }, ""); }// Request is accepted by Bureau
 
 
                 let step1 = await fetchReport(orderId, user_answer, false, reportId, accessCode);
@@ -95,18 +95,18 @@ exports.getReport = async (req, res, next) => {
 
                 if (statusStep1 !== 200) {
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['failed'] }); //Set the status as initiated and save the report id 
-                    return ResHelper.apiResponse(res, false, crifStatus[statusCodeStep1], 403, { dataStep1 }, "");
+                    return ResHelper.apiResponse(res, false, crifStatus[statusCodeStep1], 403, {status: 'failed',data: dataStep1 }, "");
                 }//Return if got any error with the response
 
                 if (statusCodeStep1 == "S11") {//If it's authentication phase
 
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['questinare'] }); //If the user’s answer sent in request is incorrect
-                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 201, { data: dataStep1 }, "")
+                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 201, { status: 'questinare', data: dataStep1 }, "")
 
-                } else if (statusCodeStep1 == "S02") {//If it's authentication phase
+                } else if (statusCodeStep1 == "S02") {//Auth Fail
 
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['failed'] }); //all questions answered incorrectly
-                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 403, { data: dataStep1 }, "")
+                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 403, {status: 'failed', data: dataStep1 }, "")
 
                 } else if (statusCodeStep1 == "S01" || statusCodeStep1 == "S10") {//If the authentication has been completed
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['questinare_success'] }); //Auto Authentication – Confident match from Bureau.
@@ -114,8 +114,8 @@ exports.getReport = async (req, res, next) => {
                     let step2 = await fetchReport(orderId, user_answer, true, reportId, accessCode);
 
                     let finalData = await generateReport(step2, permanent_account_number);//to get the report and desctruct the data
-                    let { credit_score, monthly_obligations , outstanding_obligations } = finalData.meta_data || {}
-                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { credit_score,monthly_obligations: String(monthly_obligations), outstanding_obligations: String(outstanding_obligations), report_url: finalData?.report_url, status: bureauStatus['report_generated'] }); //Auto Authentication – Confident match from Bureau.
+                    let { credit_score, monthly_obligations, outstanding_obligations } = finalData.meta_data || {}
+                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { credit_score, monthly_obligations: String(monthly_obligations), outstanding_obligations: String(outstanding_obligations), report_url: finalData?.report_url, status: bureauStatus['report_generated'] }); //Auto Authentication – Confident match from Bureau.
 
                     return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', data: finalData }, "");
 
@@ -133,6 +133,6 @@ exports.getReport = async (req, res, next) => {
     catch (e) {
         let data = catchError(e);
         logger.log({ level: 'error', message: data });
-        apiResponse(res, false, data.message, data.status, data.data ? data.data : {}, "");
+        apiResponse(res, false, data.message, data.status, { status: 'failed', data: data.data || {} }, "");
     }
 }
