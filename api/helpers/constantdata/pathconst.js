@@ -4,13 +4,13 @@ exports.PagesPath = {
   DocPage: appRoot + "/api/doc/index.html"
 };
 exports.ControllersPath = {
-  UserControllerV2: appRoot + '/api/v2/controllers/user/index.js',
-  VerificationControllerV2: appRoot + '/api/v2/controllers//e-kyc/verification/index.js'
+  UserControllerV1: appRoot + '/api/v1/controllers/user/index.js',
+  VerificationControllerV1: appRoot + '/api/v1/controllers//e-kyc/verification/index.js'
 };
 
 exports.FilesPath = {
   // V1Routes: appRoot + "/api/v1/routes/index.js",
-  V2Routes: appRoot + "/api/v2/routes/index.js",
+  V1Routes: appRoot + "/api/v1/routes/index.js",
   DBContaxt: appRoot + "/api/lib/mysql.js",
   Encryption: appRoot + "/api/helpers/crypto/Encryption.js",
   ConfigUrl: appRoot + "/api/helpers/constantdata/config.js",
@@ -33,7 +33,7 @@ exports.FilesPath = {
 };
 
 exports.ReqModelsPath = {
-  UserModelV2: appRoot + "/api/v2/models/user/index.js",
+  UserModelV2: appRoot + "/api/v1/models/user/index.js",
 };
 
 exports.ServicesPath = {

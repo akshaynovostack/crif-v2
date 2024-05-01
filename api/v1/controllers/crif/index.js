@@ -84,6 +84,10 @@ exports.getReport = async (req, res, next) => {
 
                 await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { report_id: reportId, status: bureauStatus['authenticated'] }); //Set the status as initiated and save the report id 
 
+                if (status == "S08") {//If tech error from crif
+                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['failed'] }); //Set the status as initiated and save the report id 
+                    return ResHelper.apiResponse(res, false, crifStatus[status], 403, { status: 'failed', data: initiateOrder.data }, "");
+                }// Request is accepted by Bureau
                 if (status !== "S06") { return ResHelper.apiResponse(res, false, crifStatus[status], 403, { status: 'authenticated', data: initiateOrder.data }, ""); }// Request is accepted by Bureau
 
 
