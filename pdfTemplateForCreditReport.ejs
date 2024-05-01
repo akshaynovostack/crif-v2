@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrifReport</title>
+  <style media="print" type="text/css">
+    caption {
+      background: #9f9fe8;
+    }
+  </style>
+  <style>
+    * {
+      margin: 0;
+    }
+
+    body {
+      margin: 20px;
+      font-family: Tahoma, sans-serif;
+    }
+
+    p {
+      font-size: 10px;
+    }
+
+    td {
+      font-size: 10px;
+      padding: 5px;
+      color: #194771;
+      font-weight: bold;
+    }
+
+    th {
+      font-size: 10px;
+      padding: 5px;
+      color: #194771;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    .mt-1 {
+      margin-top: 10px;
+    }
+
+    .mt-2 {
+      margin-top: 20px;
+    }
+
+    .mt-3 {
+      margin-top: 30px;
+    }
+
+    .mt-4 {
+      margin-top: 40px;
+    }
+
+    .mt-5 {
+      margin-top: 50px;
+    }
+
+    .pl-0 {
+      padding-left: 0px;
+    }
+
+    .pl-1 {
+      padding-left: 10px;
+    }
+
+    .pl-2 {
+      padding-left: 20px;
+    }
+
+    .pt-1 {
+      padding-top: 10px;
+    }
+
+    caption {
+      text-align: left;
+      /* background: #9f9fe8; */
+      padding: 8px;
+      margin-top: 25px;
+      font-size: smaller;
+      margin-bottom: 15px;
+      /* border: 1px solid #dcebf4; */
+    }
+
+    .caption {
+      /* background: #9f9fe8; */
+      padding: 8px;
+      margin-top: 25px;
+      font-size: smaller;
+      margin-bottom: 15px;
+      border: 1px solid rgb(115, 115, 115);
+    }
+
+    .header-container {
+      width: 90%;
+      height: fit-content;
+      position: relative;
+      margin: auto;
+    }
+
+    .header-container h2 {
+      width: 247px;
+      font-size: 22px;
+      margin: auto;
+      margin-bottom: 25px;
+    }
+
+    .header-container img {
+      width: 133px;
+    }
+
+    .sub-head {
+      position: absolute;
+      top: 78px;
+      left: 41%;
+    }
+
+    .highmark-sub {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .box-gp table {
+      border: 1px solid #dcebf4;
+    }
+
+    .box-gp th {
+      border: 1px solid #dcebf4;
+    }
+
+    .sep {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      padding-left: 40px;
+    }
+
+    /* .cpt{
+        background-color: #1a4567;
+        color: white;
+        -webkit-print-color-adjust: exact;
+      } */
+    .color-2 {
+      background-color: #dcebbf;
+    }
+
+    .color-1 {
+      background-color: #a9cb99;
+    }
+
+    .light-grey {
+      background-color: #d3dfd3;
+    }
+
+    .orange {
+      background-color: #fac687;
+    }
+
+    .light-orange {
+      background-color: #fdead2;
+    }
+
+    .light-pink {
+      background-color: #ffe1dc;
+    }
+
+    .box-clr {
+      background-color: #e6e6ff;
+    }
+
+    .white-clr {
+      background-color: white;
+    }
+
+    .red-clr {
+      background-color: red;
+    }
+
+    @media print {
+      .red-clr {
+        background-color: red !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .white-clr {
+        background-color: #ffffff !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .box-clr {
+        background-color: #e6e6ff !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .color-1 {
+        background-color: #a9cb99 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .color-2 {
+        background-color: #dcebbf !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .light-grey {
+        background-color: #d3dfd3 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .orange {
+        background-color: #fac687 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .light-orange {
+        background-color: #fdead2 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .light-pink {
+        background-color: #ffe1dc !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .light-blue {
+        background-color: #b8dfe4 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+    }
+
+    .light-blue {
+      background-color: #b8dfe4;
+    }
+
+    .blue {
+      color: #194771;
+    }
+
+    .var-bl td {
+      color: #726868;
+    }
+
+    .lb {
+      color: #726868;
+    }
+
+    .lb-1 {
+      color: #424242;
+      font-size: small;
+      font-weight: normal;
+    }
+
+    .appendix tr:nth-child(even) {
+      background-color: #eff5f5 !important;
+    }
+
+    .appendix tr:nth-child(even) {
+      background-color: #eff5f5 !important;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .comments tr:nth-child(even) {
+      background-color: #eff5f5 !important;
+
+    }
+
+    .comments tr:nth-child(even) {
+      background-color: #eff5f5 !important;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .var-bl tr:nth-child(even) {
+      background-color: #eff5f5 !important;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+
+
+
+    .score {
+      width: fit-content;
+      color: #5050a1;
+      padding: 20px 50px;
+      border-radius: 15px;
+      background: #d3dfd3;
+      position: absolute;
+      top: 426px;
+      right: 38px;
+      text-align: center;
+      font-weight: normal !important;
+      font-size: 20px;
+    }
+
+    .pos {
+      position: relative;
+    }
+
+    li {
+      list-style-type: none;
+    }
+
+    ul li::before {
+      content: "\25A0";
+      color: red;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    ul .li-red::before {
+      content: "\25A0";
+      color: red;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    ul .li-green::before {
+      content: "\25A0";
+      color: rgb(66, 164, 0);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .scor-fac {
+      position: relative;
+
+    }
+
+    .tip li {
+      padding-left: 20px;
+    }
+
+    .tip {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      margin-right: 34px;
+
+    }
+
+    .dark-blue {
+      background-color: #194771;
+      color: white;
+      padding: 0 10px 0 10px;
+    }
+
+    .mois-red {
+      color: #840f0a;
+      font-size: 15px;
+    }
+
+    .red {
+      color: red;
+    }
+
+    /* , tr, th, td */
+  </style>
+</head>
+
+<body>
+  <!-- header start -->
+  <table class="header-container">
+    <tr>
+      <td><img src="https://ruloans-bucket.s3.amazonaws.com/crif/logo.png" alt="" /></td>
+      <td>
+        <h2>CONSUMER CREDIT REPORT</h2>
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>CHM Ref #:</td>
+            <td>
+              <%= data.B2C_REPORT.HEADER.REPORT_ID %>
+            </td>
+          </tr>
+          <tr>
+            <td>Date of Request:</td>
+            <td>
+              <%= data.B2C_REPORT.HEADER.DATE_OF_REQUEST %>
+            </td>
+          </tr>
+          <tr>
+            <td>Date of Issue:</td>
+            <td>
+              <%= data.B2C_REPORT.HEADER.DATE_OF_ISSUE %>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <p class="sub-head">For <%= data.B2C_REPORT.REQUEST.NAME %>
+  </p>
+  <hr />
+
+  <!-- header end  -->
+
+  <!-- Inquiry Input Information strat -->
+
+  <table bgcolor="orange">
+    <caption class="color-1">
+      Inquiry Input Information
+    </caption>
+    <table>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>Name:</td>
+              <td class="lb">
+                <%= data.B2C_REPORT.REQUEST.NAME %>
+              </td>
+            </tr>
+            <tr>
+              <td>Father:</td>
+              <td class="lb">
+                <%= data.B2C_REPORT.REQUEST.FATHER %>
+              </td>
+            </tr>
+            <tr>
+              <td>Phone Numbers:</td>
+              <td class="lb">
+                <%= data.B2C_REPORT.REQUEST.PHONE_1 %>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td>DOB/Age:</td>
+              <td class="lb">
+                <%= data.B2C_REPORT.REQUEST.DOB %>
+              </td>
+            </tr>
+            <tr>
+              <td>Spouse:</td>
+              <td class="lb"></td>
+            </tr>
+            <tr>
+              <td>Email ID(s):</td>
+              <td class="lb">
+                <%= data.B2C_REPORT.REQUEST.EMAIL_1 %>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr>
+              <td>Gender:</td>
+              <td class="lb"></td>
+            </tr>
+            <tr>
+              <td>Mother:</td>
+              <t class="lb">
+        </td>
+      </tr>
+      <tr>
+        <td>ID(s):</td>
+        <td class="lb">
+          <%= data.B2C_REPORT.REQUEST.PAN %>
+        </td>
+      </tr>
+    </table>
+    </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td>Current Address:</td>
+      <td class="lb">
+        <%= data.B2C_REPORT.REQUEST.ADDRESS_1 %>
+      </td>
+    </tr>
+    <tr>
+      <td>Other Address:</td>
+      <%= data.B2C_REPORT.REQUEST.ADDRESS_2 %>
+    </tr>
+  </table>
+  </table>
+  <!-- Inquiry Input Information end -->
+
+  <!-- CRIF HIGHMARK SCORE (S): start -->
+  <table class="highmark-conatiner">
+    <caption class="color-2" style="margin-bottom: 60px;">
+      CRIF HIGHMARK SCORE (S):
+    </caption>
+    <tr>
+      <td>SCORE NAME</td>
+      <td>Score Range</td>
+      <td></td>
+    </tr>
+    <% for(var i=0; i<data.B2C_REPORT.SCORES.length; i++) {%>
+      <tr class="light-grey  pos">
+        <td class="lb">
+          <%= data.B2C_REPORT.SCORES[i].SCORE.SCORE_TYPE%>
+        </td>
+        <td class="lb">
+          <%=data.B2C_REPORT.SCORES[i].SCORE.SCORE_VALUE%>
+        </td>
+      </tr>
+      <td class="score">
+        <h1 style="font-weight: normal
+          ;">
+          <%=data.B2C_REPORT.SCORES[i].SCORE.SCORE_VALUE%>
+        </h1>
+        <h4 style="font-weight: normal
+          ;">
+          Score
+        </h4>
+      </td>
+      <% } %>
+
+  </table>
+
+
+
+
+  <!-- scoring factor -->
+  <h5 class="mt-3">SCORING FACTORS</h5>
+
+  <ul class="pl-1 " class="lb  scor-fac">
+    <table>
+      <tr>
+        <td>
+          <li class="lb-1 li-red">
+            Normal proportion of outstanding balance to disbursed amount
+          </li>
+        </td>
+        <td>
+          <li class="lb-1 li-red">
+            Normal proportion of outstanding balance to disbursed amount
+          </li>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <li class="lb-1 li-green">Very recent delinquency observed</li>
+        </td>
+      </tr>
+    </table>
+
+    <div class="tip">
+      <p>Tip:</p>
+      <li class="lb-1 li-green">Positive impact on credit score</li>
+      <li class="lb-1 li-red">
+        Negative impact on credit score
+      </li>
+    </div>
+  </ul>
+
+  <!-- CRIF HIGHMARK SCORE (S):   end  -->
+
+  <!-- Personal Information - Variations start -->
+
+  <table class="lb">
+    <caption class="orange">
+      Personal Information - Variations
+    </caption>
+    <tr>
+      <td>
+        <table class="var-bl">
+          <tr>
+            <th>Name Variations</th>
+            <th>Reported on</th>
+          </tr>
+          <% for(var i=0; i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.NAME_VARIATIONS.length; i++) {%>
+            <tr>
+              <td>
+                <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.NAME_VARIATIONS[i].VARIATION.VALUE %>
+              </td>
+              <td>
+                <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.NAME_VARIATIONS[i].VARIATION.REPORTED_DATE %>
+              </td>
+            </tr>
+            <% } %>
+              <br />
+              <tr>
+                <th class="pt-1">Address Variations</th>
+                <th class="pt-1">Reported On</th>
+              </tr>
+              <% for(var i=0; i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.ADDRESS_VARIATIONS.length; i++) {%>
+                <tr>
+                  <td>
+                    <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.ADDRESS_VARIATIONS[i].VARIATION.VALUE %>
+                  </td>
+                  <td>
+                    <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.ADDRESS_VARIATIONS[i].VARIATION.REPORTED_DATE %>
+                  </td>
+                </tr>
+                <% } %>
+        </table>
+      </td>
+      <td>
+        <table class="var-bl" style="border: 3px solid #c79f4e">
+          <tr>
+            <th>DOB Variations</th>
+            <th>Reported On</th>
+          </tr>
+          <% for(var i=0; i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.DATE_OF_BIRTH_VARIATIONS.length; i++) {%>
+            <tr>
+              <td>
+                <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.DATE_OF_BIRTH_VARIATIONS[i].VARIATION.VALUE %>
+              </td>
+              <td>
+                <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.DATE_OF_BIRTH_VARIATIONS[i].VARIATION.REPORTED_DATE %>
+              </td>
+            </tr>
+            <% } %>
+              <tr>
+                <th class="pt-1">Phone Variations</th>
+                <th class="pt-1">Reported On</th>
+              </tr>
+              <% for(var i=0; i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.PHONE_NUMBER_VARIATIONS.length; i++) {%>
+                <tr>
+                  <td>
+                    <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.PHONE_NUMBER_VARIATIONS[i].VARIATION.VALUE %>
+                  </td>
+                  <td>
+                    <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.PHONE_NUMBER_VARIATIONS[i].VARIATION.REPORTED_DATE %>
+                  </td>
+                </tr>
+                <% } %>
+                  <tr>
+                    <th class="pt-1">ID Variations</th>
+                    <th class="pt-1">Reported On</th>
+                  </tr>
+                  <% for(var i=0; i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.PAN_VARIATIONS.length; i++) {%>
+                    <tr>
+                      <td>
+                        <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.PAN_VARIATIONS[i].VARIATION.VALUE %>(PAN)
+                      </td>
+                      <td>
+                        <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.PAN_VARIATIONS[i].VARIATION.REPORTED_DATE %>
+                      </td>
+                    </tr>
+                    <% } %>
+                      <% if (data.B2C_REPORT.PERSONAL_INFO_VARIATION.UID_VARIATIONS) { %>
+                        <% for(var i=0; i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.UID_VARIATIONS.length; i++) {%>
+                          <tr>
+                            <td>
+                              <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.UID_VARIATIONS[i].VARIATION.VALUE %>(UID)
+                            </td>
+                            <td>
+                              <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.UID_VARIATIONS[i].VARIATION.REPORTED_DATE %>
+                            </td>
+                          </tr>
+                          <% } %>
+                            <%}%>
+                              <% for(var i=0;
+                                i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.DRIVING_LICENSE_VARIATIONS.length; i++) {%>
+                                <tr>
+                                  <td>
+                                    <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.DRIVING_LICENSE_VARIATIONS[i].VARIATION.VALUE
+                                      %>(DL)
+                                  </td>
+                                  <td>
+                                    <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.DRIVING_LICENSE_VARIATIONS[i].VARIATION.REPORTED_DATE
+                                      %>
+                                  </td>
+                                </tr>
+                                <% } %>
+                                  <% for(var i=0; i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.VOTER_ID_VARIATIONS.length;
+                                    i++) {%>
+                                    <tr>
+                                      <td>
+                                        <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.VOTER_ID_VARIATIONS[i].VARIATION.VALUE
+                                          %>(Voter ID)
+                                      </td>
+                                      <td>
+                                        <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.VOTER_ID_VARIATIONS[i].VARIATION.REPORTED_DATE
+                                          %>
+                                      </td>
+                                    </tr>
+                                    <% } %>
+                                      <% for(var i=0;
+                                        i<data.B2C_REPORT.PERSONAL_INFO_VARIATION.PASSPORT_VARIATIONS.length; i++) {%>
+                                        <tr>
+                                          <td>
+                                            <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.PASSPORT_VARIATIONS[i].VARIATION.VALUE
+                                              %>(Passport)
+                                          </td>
+                                          <td>
+                                            <%=data.B2C_REPORT.PERSONAL_INFO_VARIATION.PASSPORT_VARIATIONS[i].VARIATION.REPORTED_DATE
+                                              %>
+                                          </td>
+                                        </tr>
+                                        <% } %>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Personal Information - Variations end -->
+
+  <!-- Account Summary start -->
+
+  <table>
+    <caption class="light-orange">
+      Account Summary
+    </caption>
+
+    <tr style="outline: 1px solid #dcebf4">
+      <td>Number of Account(s)</td>
+      <td>Active Account(s)</td>
+      <td>Overdue Account(s)</td>
+      <td>Current Balance</td>
+      <td>Amt Disbd/ High Credit</td>
+    </tr>
+    <tr style="outline: 1px solid #dcebf4">
+      <td class="sep">
+        <%=data.B2C_REPORT.ACCOUNTS_SUMMARY.PRIMARY_ACCOUNTS_SUMMARY.PRIMARY_NUMBER_OF_ACCOUNTS %>
+      </td>
+      <td class="sep">
+        <%=data.B2C_REPORT.ACCOUNTS_SUMMARY.PRIMARY_ACCOUNTS_SUMMARY.PRIMARY_ACTIVE_NUMBER_OF_ACCOUNTS %>
+      </td>
+      <td class="sep">
+        <%=data.B2C_REPORT.ACCOUNTS_SUMMARY.PRIMARY_ACCOUNTS_SUMMARY.PRIMARY_OVERDUE_NUMBER_OF_ACCOUNTS %>
+      </td>
+      <td class="sep">
+        <%=data.B2C_REPORT.ACCOUNTS_SUMMARY.PRIMARY_ACCOUNTS_SUMMARY.PRIMARY_CURRENT_BALANCE %>
+      </td>
+      <td class="sep">
+        <%=data.B2C_REPORT.ACCOUNTS_SUMMARY.PRIMARY_ACCOUNTS_SUMMARY.PRIMARY_DISBURSED_AMOUNT %>
+      </td>
+    </tr>
+    <tr style="outline: 1px solid #dcebf4">
+      <td>Inquiries in last 24 Months:</td>
+      <td>New Account(s) in last 6 Months:</td>
+      <td>
+        <%=data.B2C_REPORT.ACCOUNTS_SUMMARY.DERIVED_ATTRIBUTES.NEW_ACCOUNTS_IN_LAST_SIX_MONTHS %>
+      </td>
+      <td>New Delinquent Account(s) in last 6 Months:</td>
+      <td>
+        <%=data.B2C_REPORT.ACCOUNTS_SUMMARY.DERIVED_ATTRIBUTES.NEW_DELINQ_ACCOUNT_IN_LAST_SIX_MONTHS %>
+      </td>
+    </tr>
+  </table>
+  <!-- Account Summary end -->
+
+  <!-- Account Information section start -->
+  <table>
+    <caption class="color-1">
+      Account Information
+    </caption>
+  </table>
+
+  <!-- for 1 -->
+  <% if (data.B2C_REPORT.RESPONSES) { %>
+    <% for(var i=0; i<data.B2C_REPORT.RESPONSES.length; i++) {%>
+      <div style="width: 80%; margin: auto; margin-bottom: 60px;">
+
+        <table class="color-2">
+          <tr style="outline: 1px solid #dcebf4">
+            <td class="dark-blue">
+              <%= i+1 %>
+            </td>
+            <td>
+              <table>
+                <tr>
+                  <td>Account Type:</td>
+                  <td class="mois-red">
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.ACCT_TYPE %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <tr>
+                  <td>Credit Grantor:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.CREDIT_GUARANTOR %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <tr>
+                  <td>Account #:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.ACCT_NUMBER %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <tr>
+                  <td>Info. as of:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.DATE_REPORTED %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+
+            <td class="light-pink" style="text-align: center; width: 0;">Active</td>
+            <td>
+              <table style="margin: 20px">
+                <tr>
+                  <td>Ownership:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.OWNERSHIP_IND %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Credit Limit:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.CREDIT_LIMIT %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Cash Limit:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.CASH_LIMIT %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>InstlAmt/Freq:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.ACTUAL_PAYMENT %>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Status:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.ACCOUNT_STATUS %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Settlement Amt:</td>
+                  <td></td>
+                </tr>
+              </table>
+
+            </td>
+            <td>
+              <table style="margin: 20px">
+                <tr>
+                  <td>Disbursed Date:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.DISBURSED_DT %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Last Payment Date:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.LAST_PAYMENT_DATE %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Closed Date</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.CLOSED_DATE %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tenure(month):</td>
+                  <td></td>
+                </tr>
+                <tr>
+
+                </tr>
+                <tr>
+
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table style="margin: 20px">
+                <tr>
+                  <td>Disbd Amt/High Credit</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.DISBURSED_AMT %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Current Balance:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.CURRENT_BAL %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Last Paid Amt:</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Overdue Amt:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.OVERDUE_AMT %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Principal Writeoff Amt</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Total Writeoff Amt:</td>
+                  <td>
+                    <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.WRITE_OFF_AMT %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Payment History/Asset Classification:  start-->
+
+        <h5 class="mt-3">Payment History/Asset Classification:</h5>
+        <table class="box-gp mt-2" style="border-collapse: collapse">
+          <tr class="box-clr">
+            <th class="white-clr"></th>
+            <th>January</th>
+            <th>February</th>
+            <th>March</th>
+            <th>April</th>
+            <th>May</th>
+            <th>June</th>
+            <th>July</th>
+            <th>August</th>
+            <th>September</th>
+            <th>October</th>
+            <th>November</th>
+            <th>December</th>
+          </tr>
+          <% let keys=Object.keys(data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED)%>
+            <% for (let k=0;k<keys.length;k++) {%>
+              <tr>
+                <th class="box-clr">
+                  <%=keys[k]%>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Jan'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Feb'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Mar'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Apr'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['May'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Jun'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Jul'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Aug'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Sep'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Oct'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Nov'] %>
+                </th>
+                <th>
+                  <%= data.B2C_REPORT.RESPONSES[i].RESPONSE.LOAN_DETAILS.COMBINED_PAYMENT_FORMATTED[keys[k]]['Dec'] %>
+                </th>
+              </tr>
+              <% } %>
+        </table>
+      </div>
+      <% } %>
+        <% } %>
+
+
+
+          <!-- Payment History/Asset Classification:  end-->
+
+          <!-- Account Information section end -->
+
+
+
+          <!-- Inquiry Done by Lenders (Reported For Past 24 Months)   start -->
+
+
+
+          <table class="mt-5" style="width: 80%; margin: auto;  margin-bottom: 60px;">
+            <caption class="color-1">Inquiry Done by Lenders (Reported For Past 24 Months)</caption>
+            <tr>
+              <td>Lender Name</td>
+              <td>Date of Inquiry</td>
+              <td>Purpose</td>
+              <td>Ownership Type</td>
+              <td>Amount</td>
+              <td>Remark</td>
+            </tr>
+            <tr>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+          </table>
+
+
+          <!-- comments -->
+          <table class="mt-5 comments " style="width: 80%; margin: auto;  margin-bottom: 60px;">
+            <caption class="light-blue">Comments</caption>
+            <tr>
+              <td>Description</td>
+              <td>Date</td>
+            </tr>
+            <tr>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+          </table>
+
+          <!-- the end -->
+          <h3 style="text-align: center;">-END OF CONSUMER CREDIT REPORT-</h3>
+
+          <!-- the end -->
+
+
+
+          <!-- appendix -->
+
+          <hr>
+          <table class="mt-5 appendix" style="width: 80%; margin: auto;  margin-bottom: 60px;">
+            <caption class="light-grey">Appendix</caption>
+            <tr>
+              <td>Section </td>
+              <td>Code</td>
+              <td>Description</td>
+            </tr>
+            <tr>
+              <td>Account Summary</td>
+              <td>Number of Delinquent Accounts</td>
+              <td>Indicates number of accounts that the applicant has defaulted on within the last 6 months</td>
+            </tr>
+            <tr>
+              <td>Account Information - Credit Grantor</td>
+              <td>XXXX</td>
+              <td>Name of grantor undisclosed as credit grantor is different from inquiring institution</td>
+            </tr>
+            <tr>
+              <td>Account Information - Account #</td>
+              <td>xxxx</td>
+              <td>Account Number undisclosed as credit grantor is different from inquiring institution</td>
+            </tr>
+            <tr>
+              <td>Payment History / Asset Classification</td>
+              <td>XXX</td>
+              <td>Data not reported by institution</td>
+            </tr>
+            <tr>
+              <td>Payment History / Asset Classification</td>
+              <td>-</td>
+              <td>Not applicable</td>
+            </tr>
+            <tr>
+              <td>Payment History / Asset Classification</td>
+              <td>STD</td>
+              <td>Account Reported as STANDARD Asset</td>
+            </tr>
+            <tr>
+              <td>Payment History / Asset Classification</td>
+              <td>SUB</td>
+              <td>Account Reported as SUB-STANDARD Asset</td>
+            </tr>
+            <tr>
+              <td>Payment History / Asset Classification</td>
+              <td>DBT</td>
+              <td>Account Reported as DOUBTFUL Asset</td>
+            </tr>
+            <tr>
+              <td>Payment History / Asset Classification</td>
+              <td>LOS</td>
+              <td>Account Reported as LOSS Asset</td>
+            </tr>
+            <tr>
+              <td>Payment History / Asset Classification</td>
+              <td>SMA</td>
+              <td>Account Reported as SPECIAL MENTION</td>
+            </tr>
+            <tr>
+              <td>CRIF HIGHMARK SCORE (S)</td>
+              <td>PERFORM-Consumer</td>
+              <td>Score has reckoned from credit history, pursuit of new credit, payment history, type of credit in use
+                and outstanding debt.</td>
+            </tr>
+          </table>
+          <hr>
+
+
+          <!-- Inquiry Done by Lenders (Reported For Past 24 Months)   end  -->
+</body>
+
+</html>

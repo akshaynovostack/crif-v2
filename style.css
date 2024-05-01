@@ -1,0 +1,309 @@
+
+body {
+    margin: 50px;
+    margin-right: 90px;
+    font-family: Tahoma, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 100;
+}
+
+
+
+
+.blue {
+    color: #0066ff;
+}
+.blue-1{
+    color: #0066ff8e;
+}
+
+.red {
+    color: rgb(248, 110, 110);
+}
+
+.black {
+    color: black;
+}
+
+
+.underline {
+    border-bottom: 3px solid rgb(229, 229, 229);
+    width: fit-content;
+    padding-bottom: 30px;
+}
+.mt{
+    margin-top: 0;
+}
+
+
+#bg-blue {
+    background-color: #6fa630;
+    color: white;
+}
+
+.header-bg {
+    background-color: rgb(220 220 220);
+}
+
+.box {
+    padding-left: 10px;
+    margin: 5px;
+}
+
+.a-lft {
+    text-align: left;
+}
+
+.a-rgt {
+    text-align: right;
+}
+
+table {
+    width: 100%;
+}
+
+.header {
+    border-bottom: 3px solid rgb(220 220 220);
+}
+
+.header-logo img {
+    width: 30%;
+    text-align: left;
+}
+
+.header-logo {
+    text-align: left;
+}
+
+.header-text {
+    text-align: right;
+}
+
+/* profile section  */
+
+.profile tr {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.profile-about-text {
+    text-align: left;
+}
+
+.profile-about-text h1::after {
+    content: "Credit Report";
+}
+
+.profile-powered {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.profile-powered img {
+    width: 12%;
+}
+
+/* credit score */
+
+
+.credit-score table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.credit-score td {
+    padding: 10px;
+}
+
+.credit-score th,
+td {
+    text-align: left;
+    padding: 16px;
+}
+
+/* Report Summary  */
+
+.report-summary-t1 table {
+    border-right: 1px solid rgb(214, 214, 214);
+}
+
+.report-summary-t3 table {
+    border-left: 1px solid rgb(214, 214, 214);
+}
+
+/* SUMMARY : Credit Account Information  */
+
+
+
+/* .account-info-container{
+    border: 1px solid black;
+} */
+
+.account-info-container th {
+
+    border: 1px solid rgb(211 211 211);
+
+}
+
+.account-info-container td {
+
+    border: 1px solid rgb(211 211 211);
+
+}
+
+.account-info-container {
+    border-collapse: collapse;
+}
+
+
+/*    <!-- < Credit Account Information Details --> */
+
+.credit-info-container{
+    border-collapse: collapse;
+}
+
+.credit-info-t1{
+    padding: 0;
+}
+.credit-info-t2{
+    padding: 0;
+}
+
+.credit-info-t3{
+    padding: 0;
+}
+
+.seperate{
+    padding-bottom: 19.5px;
+}
+
+.credit-info-t1 table {
+    border: 1px solid rgb(211 211 211);
+}
+
+.credit-info-t1 caption {
+        border: 1px solid rgb(211 211 211);
+}
+
+.credit-info-t2 caption {
+        border: 1px solid rgb(211 211 211);
+}
+
+.credit-info-t3 caption {
+        border: 1px solid rgb(211 211 211);
+}
+
+.credit-info-t2 table {
+        border: 1px solid rgb(211 211 211);
+}
+
+.credit-info-t3 table {
+        border: 1px solid rgb(211 211 211);
+}
+
+
+/* payment-history */
+.payment-history{
+    border-collapse: collapse;
+
+}
+.payment-history tr th{
+    font-size: 1.5rem;
+    text-align: center;
+    padding-top:15px;
+    padding-bottom: 15px;
+    background-color: rgb(232, 232, 232);
+}
+
+.grey{
+    background-color: rgb(232, 232, 232); 
+}
+.payment-history tr td{
+    text-align: center;
+}
+
+.pay-his-cap {
+    padding-top: 80px;
+}
+
+.payment-history tr{
+    border-collapse: collapse;
+}
+.payment-history tr {
+    border: 1px solid rgb(211 211 211);
+}
+
+.payment-history td {
+    border: 1px solid rgb(211 211 211);
+}
+
+.payment-history th {
+    border: 1px solid rgb(211 211 211);
+}
+
+
+/*     <!-- Consumer Personal details on the Consumer Loan --> */
+
+.consumer-pers-detail-container{
+    border: 1px solid rgb(211 211 211);
+}
+.consume-tab-1{
+    border-right: 1px solid rgb(211 211 211);
+}
+.consume-tab-2{
+    border-right: 1px solid rgb(211 211 211);
+}
+.consumer-pers-detail-t3 td{
+    padding: 8px;
+}
+
+
+/* Enguiry */
+
+.enguiry{
+    border: 1px solid rgb(211 211 211);
+    border-collapse:collapse ;
+    font-weight: 600;
+}
+.enguiry table{
+    border: 1px solid rgb(211 211 211);
+}
+.enguiry-pad{
+    padding: 0;
+}
+
+/* legend */
+.legend-ul{
+    line-height: 37px;
+}
+
+
+/* the-end  */
+
+.the-end{
+    padding-top: 40px;
+    text-align: center;
+    color: rgb(95, 88, 88);
+}
+.the-end-1{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 50px;
+}
+.the-end-1 img{
+    width: 190px;
+}
+
+.last-img img {
+    width: 12%;
+}
