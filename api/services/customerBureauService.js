@@ -16,7 +16,6 @@ async function updateBureauDataByCustomerIdAndVendor(vendor, customerId, newData
         newData['updated_at'] = new Date().toISOString();//to update to current date and time
 
         // Update bureau records associated with the customer ID and vendor
-        console.log(customerId, vendor);
         const updatedRecords = await CustomerBureau.query()
             .where('customer_id', customerId)
             .where('vendor', vendor)
