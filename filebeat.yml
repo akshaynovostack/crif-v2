@@ -2,7 +2,9 @@ filebeat.inputs:
 - type: log
   enabled: true
   paths:
-    - /usr/src/app/logs/*.log
+    - ./logs/error/*.log
+    - ./logs/warn/*.log
+    - ./logs/info/*.log
 
 output.logstash:
   hosts: ["localhost:5044"]
