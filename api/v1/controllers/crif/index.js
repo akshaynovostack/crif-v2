@@ -111,7 +111,7 @@ exports.getReport = async (req, res, next) => {
                 } else if (statusCodeStep1 == "S09") {//Auth Fail
 
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['failed'] }); //all questions answered incorrectly
-                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 201, { status: 'no-hit', data: dataStep1 }, "")
+                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 201, { status: 'no_hit', data: dataStep1 }, "")
 
                 } else if (statusCodeStep1 == "S02") {//Auth Fail
 
