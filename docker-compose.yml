@@ -3,11 +3,24 @@ services:
   nodejs:
     build: .
     ports:
-      - "4001:4001"
+      - "${PORT}:4003"
     volumes:
       - .:/usr/src/app
     depends_on:
       - filebeat
+    environment:
+      PORT: ${PORT}
+      NODE_ENV: ${NODE_ENV}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_HOST: ${DB_HOST}
+      DB_DRIVER: ${DB_DRIVER}
+      DB_PORT: ${DB_PORT}
+      ACCESS_KEY_ID: ${ACCESS_KEY_ID}
+      SECRET_ACCESS_KEY: ${SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      S3_BUCKET: ${S3_BUCKET}
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.17.0
