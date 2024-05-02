@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 4003
 
 # Start the Node.js application
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
