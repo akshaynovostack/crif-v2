@@ -34,6 +34,7 @@ exports.getReport = async (req, res, next) => {
 
             if (customer_addresses && customer_addresses.length) {
                 let permanentAdresses = customer_addresses.find(e => e.address_type_id == 'permanent_address');
+                permanentAdresses = permanentAdresses||customer_addresses[0];
                 let { address_line_1, address_line_2, address_line_3, pin_code, city, state } = permanentAdresses;
                 if (Object.keys(permanentAdresses).length) {//Modify new addressstreet
                     address_1 = (address_line_1 + " " + address_line_2) || address_1
@@ -68,7 +69,7 @@ exports.getReport = async (req, res, next) => {
             }
 
             let dataString = `${first_name ? first_name : ""}|${middle_name ? middle_name : ""}|${last_name ? last_name : ""}|${gender || ""}|${dob}|||${customer_mobile_number}|||${email_address}||${permanent_account_number ? permanent_account_number : ""}||||||||${father_name || ""}|||${address_1}|${village_1}|${city_1}|${state_1}|${pin_1}|${country_1}|||||||${crifCustomerId}|${crifProductId}|${consent}|`; //This is the data string we need to send to crif
-
+console.log(dataString);
             let initiateOrder = await initiate(dataString, orderId, accessCode); //Initiate the orde at crif end
 
 
