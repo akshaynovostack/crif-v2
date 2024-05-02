@@ -14,7 +14,7 @@ RUN npm i
 COPY . .
 
 # Expose the port your app runs on
-EXPOSE 4001
+EXPOSE 4003
 
 # Start the Node.js application
 CMD ["node", "app.js"]
