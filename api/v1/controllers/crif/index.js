@@ -127,7 +127,7 @@ exports.getReport = async (req, res, next) => {
                     let { credit_score, monthly_obligations, outstanding_obligations } = finalData.meta_data || {}
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { credit_score, monthly_obligations: String(monthly_obligations), outstanding_obligations: String(outstanding_obligations), report_url: finalData?.report_url, status: bureauStatus['report_generated'], created_at: new Date().toISOString() }); //Auto Authentication – Confident match from Bureau.
 
-                    return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated',refresh_enable:false , data: finalData }, "");
+                    return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', refresh_enable: false, created_at: new Date.toISOString(), data: finalData }, "");
 
                 } else {
                     return ResHelper.apiResponse(res, false, crifStatus[statusCodeStep1], 403, { status: 'failed', data: dataStep1 }, "");//Return if got any error with the response
