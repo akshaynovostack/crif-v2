@@ -105,8 +105,13 @@ console.log(dataString);
 
                 if (statusCodeStep1 == "S11") {//If it's authentication phase
 
-                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['questinare'] }); //If the user’s answer sent in request is incorrect
-                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 201, { status: 'questinare', data: dataStep1 }, "")
+                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['questionnaire'] }); //If the user’s answer sent in request is incorrect
+                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 201, { status: 'questionnaire', data: dataStep1 }, "")
+
+                } else if (statusCodeStep1 == "S09") {//Auth Fail
+
+                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['failed'] }); //all questions answered incorrectly
+                    return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 201, {status: 'no-hit', data: dataStep1 }, "")
 
                 } else if (statusCodeStep1 == "S02") {//Auth Fail
 
@@ -114,7 +119,7 @@ console.log(dataString);
                     return ResHelper.apiResponse(res, true, crifStatus[statusCodeStep1], 403, {status: 'failed', data: dataStep1 }, "")
 
                 } else if (statusCodeStep1 == "S01" || statusCodeStep1 == "S10") {//If the authentication has been completed
-                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['questinare_success'] }); //Auto Authentication – Confident match from Bureau.
+                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { status: bureauStatus['questionnaire_success'] }); //Auto Authentication – Confident match from Bureau.
 
                     let step2 = await fetchReport(orderId, user_answer, true, reportId, accessCode);
 

@@ -43,8 +43,8 @@ exports.bureauStatus = {//Don't Change them without my permission akshay.sharma@
       "pending": 1,
       "initiated": 2,
       "authenticated": 3,
-      "questinare": 4,
-      "questinare_success": 5,
+      "questionnaire": 4,
+      "questionnaire_success": 5,
       "report_generated": 6
 }
 exports.crifStatus = {
