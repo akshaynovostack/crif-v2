@@ -60,7 +60,6 @@ exports.getReport = async (req, res, next) => {
                     }
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, bureau_data)
                 }else if(bureau_data && bureau_data.status== bureauStatus['report_generated']){
-                    console.log("yes")
                     return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', refresh_enable: hasExpired ? true : false, created_at: bureau_data.created_at, data: bureau_data.report_data }, "");
                 }
             } else {
