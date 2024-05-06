@@ -4,21 +4,13 @@ services:
     build: .
     ports:
       - "4003:4003"
-    volumes:
-      - type: volume
-        source: log-data
-        target: /logs
+
 
   filebeat:
     build:
       context: ./filebeat
     volumes:
-      - type: bind
-        source: ./filebeat/filebeat.yml
-        target: /usr/share/filebeat/filebeat.yml
-        
-      - type: volume
-        source: log-data
-        target: /var/log/server
-volumes:  
-  log-data:
+      - /logs:/logs
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+
+       
