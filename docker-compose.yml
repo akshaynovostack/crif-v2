@@ -1,15 +1,13 @@
 version: '3'
 services:
   nodejs:
-    build:
-      context: .
+    build: .
+    ports:
+      - "4003:4003"
     volumes:
       - type: volume
         source: log-data
         target: /var/log/server
-    ports:
-      - "4003:4003"
-
   filebeat:
     build:
       context: ./filebeat
@@ -21,9 +19,5 @@ services:
       - type: volume
         source: log-data
         target: /var/log/server
-    networks:
-      - elk
-    depends_on:
-      - logstash
-volumes:
+volumes:  
   log-data:
