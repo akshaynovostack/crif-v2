@@ -1,4 +1,4 @@
-name: "crif-filebeat"
+name: "bureau-service"
 logging.metrics.enabled: false
 xpack.security.enabled: false
 xpack.monitoring.enabled: false
@@ -6,21 +6,22 @@ setup.ilm.enabled: false
 setup.template.enabled: false
 
 filebeat.inputs:
-- type: log
-  scan_frequency: 1s
-  enabled: true
+- type: filestream 
   paths:
-    - /src/logs/error/*.log
-    - /src/logs/warn/*.log
-    - /src/logs/info/*.log
-  fields:
-    - service: nodejs
-  fields_under_root: true
-  json:
-    keys_under_root: true
-    overwrite_keys: true
-    message_key: 'message'
+   - /src/logs/error/*.log
+   - /src/logs/warn/*.log
+   - /src/logs/info/*.log
+  parsers:
+    - ndjson:
+      overwrite_keys: true 
+      add_error_key: true 
+      expand_keys: true 
 
+processors: 
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
 
 output.logstash:
   hosts: ["13.235.47.147:5044"]
