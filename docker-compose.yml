@@ -1,27 +1,26 @@
-version: '3.8'
+version: '3'
 
 services:
-  nodejs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - type: volume
-        source: log-data
-        target: /app/logs
-    ports:
-      - "4003:4003"
-
+ 
   filebeat:
     build:
-      context: ./filebeat
+        context: ./filebeat
+    container_name: filebeat
+    command: filebeat -e -strict.perms=false
     volumes:
-      - type: bind
-        source: ./filebeat/filebeat.yml
-        target: /usr/share/filebeat/filebeat.yml
-      - type: volume
-        source: log-data
-        target: /var/log/server
+        - ./nodejs-logs:/src/logs
+    depends_on:
+        - elasticsearch
+        - kibana
 
-volumes:
-  log-data:
+  nodejs:
+    build:
+      context: ./nodejs-app 
+      dockerfile: Dockerfile
+    container_name: nodejs-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - elasticsearch
+    volumes:
+        - ./nodejs-logs:/src/logs
