@@ -7,7 +7,7 @@ services:
     volumes:
       - type: volume
         source: log-data
-        target: /app/logs
+        target: /logs
 
   filebeat:
     build:
