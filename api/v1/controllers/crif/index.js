@@ -14,7 +14,7 @@ const ResHelper = require(_pathconst.FilesPath.ResHelper);
 exports.getReport = async (req, res, next) => {
     try {
         let { customer_id, consent, user_answer, refresh_report } = req.body;
-        logger.log({ level: 'info', message: JSON.stringify(req.body) });
+        logger.log({ level: 'info', message: req.body });
 
         let orderId = "Novo" + new Date().getTime();
         let bureauId = getUUID();
@@ -145,7 +145,7 @@ exports.getReport = async (req, res, next) => {
     }
     catch (e) {
         let data = catchError(e);
-        logger.log({ level: 'error', message: JSON.stringify(data) });
+        logger.log({ level: 'error', message: data });
         apiResponse(res, false, data.message, data.status, { status: 'failed', data: data.data || {} }, "");
     }
 }
