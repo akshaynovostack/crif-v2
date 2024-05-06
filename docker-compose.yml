@@ -20,4 +20,5 @@ services:
       - type: volume
         source: log-data
         target: /var/log/server
-  
+volumes:  
+  log-data:
