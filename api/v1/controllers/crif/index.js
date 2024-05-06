@@ -15,6 +15,7 @@ exports.getReport = async (req, res, next) => {
     try {
         let { customer_id, consent, user_answer, refresh_report } = req.body;
         logger.log({ level: 'info', message: { "type": "crif", "data": req.body } });
+        logger.log({ level: 'error', message: {body:req.body  } });
 
         let orderId = "Novo" + new Date().getTime();
         let bureauId = getUUID();
