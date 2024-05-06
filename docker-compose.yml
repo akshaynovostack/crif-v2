@@ -11,12 +11,12 @@ services:
         - ./nodejs-logs:/src/logs
 
 
-  nodejs:
-    build:
-      context: . 
-      dockerfile: Dockerfile
-    container_name: nodejs-app
-    ports:
-      - "4003:4003"
-    volumes:
-        - ./nodejs-logs:/src/logs
+  # nodejs:
+  #   build:
+  #     context: . 
+  #     dockerfile: Dockerfile
+  #   container_name: nodejs-app
+  #   ports:
+  #     - "4003:4003"
+  #   volumes:
+  #       - ./nodejs-logs:/src/logs
