@@ -7,7 +7,7 @@ services:
     volumes:
       - type: volume
         source: log-data
-        target: /var/log/server
+        target: /logs
   filebeat:
     build:
       context: ./filebeat
