@@ -8,15 +8,15 @@ services:
     container_name: filebeat
     command: filebeat -e -strict.perms=false
     volumes:
-        - ./logs:/src/logs
+        - ./nodejs-logs:/src/logs
 
 
-  nodejs:
-    build:
-      context: . 
-      dockerfile: Dockerfile
-    container_name: nodejs-app
-    ports:
-      - "4003:4003"
-    volumes:
-        - /logs:/src/logs
+  # nodejs:
+  #   build:
+  #     context: . 
+  #     dockerfile: Dockerfile
+  #   container_name: nodejs-app
+  #   ports:
+  #     - "4003:4003"
+  #   volumes:
+  #       - ./nodejs-logs:/src/logs
