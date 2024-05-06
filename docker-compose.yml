@@ -1,13 +1,17 @@
-version: '3'
+version: '3.8'
+
 services:
   nodejs:
-    build: .
-    ports:
-      - "4003:4003"
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - type: volume
         source: log-data
-        target: /logs
+        target: /app/logs
+    ports:
+      - "4003:4003"
+
   filebeat:
     build:
       context: ./filebeat
@@ -15,9 +19,9 @@ services:
       - type: bind
         source: ./filebeat/filebeat.yml
         target: /usr/share/filebeat/filebeat.yml
-        
       - type: volume
         source: log-data
         target: /var/log/server
-volumes:  
+
+volumes:
   log-data:
