@@ -57,7 +57,7 @@ exports.getReport = async (req, res, next) => {
 
                 if (bureau_data && hasExpired && refresh_report) { //If the report is expired or 
                     bureau_data = {
-                        customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "",
+                        customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: consent ? 1 : 0
                     }
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, bureau_data)
                 }else if(bureau_data && bureau_data.status== bureauStatus['report_generated']){
@@ -65,7 +65,7 @@ exports.getReport = async (req, res, next) => {
                 }
             } else {
                 bureau_data = {
-                    bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "",
+                    bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: consent ? 1 : 0,
                 }
 
                 await insertCustomerBureau(bureau_data);//Insert new bureau data
