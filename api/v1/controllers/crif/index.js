@@ -9,6 +9,7 @@ const { initiate, response } = require("../../../services/crifService.js");
 const moment = require("moment");
 const { insertCustomerBureau, updateBureauDataByCustomerIdAndVendor, deleteConsentByCustomerIdAndVendor } = require("../../../services/customerBureauService.js");
 const { logger } = require("../../../helpers/logger/index.js");
+const { insertCustomerConsent } = require("../../../services/customerConsentsService.js");
 const ResHelper = require(_pathconst.FilesPath.ResHelper);
 
 exports.getReport = async (req, res, next) => {
@@ -75,9 +76,9 @@ exports.getReport = async (req, res, next) => {
                 bureau_data = {
                     bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: hasConsent
                 }
-
                 await insertCustomerBureau(bureau_data);//Insert new bureau data
             }
+            await insertCustomerConsent({ customer_id, service_type: 'bureau', consent_type: 'crif_fetch_report', description: "Consent given by customer" })
 
             let dataString = `${first_name ? first_name : ""}|${middle_name ? middle_name : ""}|${last_name ? last_name : ""}|${gender || ""}|${dob}|||${customer_mobile_number}|||${email_address}||${permanent_account_number ? permanent_account_number : ""}||||||||${father_name || ""}|||${address_1}|${village_1}|${city_1}|${state_1}|${pin_1}|${country_1}|||||||${crifCustomerId}|${crifProductId}|${consent}|`; //This is the data string we need to send to crif
             let initiateOrder = await initiate(dataString, orderId, accessCode); //Initiate the orde at crif end
