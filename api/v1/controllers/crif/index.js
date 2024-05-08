@@ -15,7 +15,15 @@ exports.getReport = async (req, res, next) => {
     try {
         let { customer_id, consent, user_answer, refresh_report } = req.body;
         logger.log({ level: 'info', message: req.body });
+        
+        let hasConsent =0;
 
+        if (consent == "Y") {
+            hasConsent == 1
+        } else {
+            return ResHelper.apiResponse(res, false, "Please provide the consent", 400, { status: 'failed', data: {} }, "");
+
+        }
         let orderId = "Novo" + new Date().getTime();
         let bureauId = getUUID();
         const user = await getUserDetailsWithBureau(customer_id, activeBureauPartner); //to fetch the customer data with active bureau partner
@@ -57,7 +65,7 @@ exports.getReport = async (req, res, next) => {
 
                 if (bureau_data && hasExpired && refresh_report) { //If the report is expired or 
                     bureau_data = {
-                        customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: consent ? 1 : 0
+                        customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: hasConsent
                     }
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, bureau_data)
                 }else if(bureau_data && bureau_data.status== bureauStatus['report_generated']){
@@ -65,7 +73,7 @@ exports.getReport = async (req, res, next) => {
                 }
             } else {
                 bureau_data = {
-                    bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: consent ? 1 : 0,
+                    bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent:hasConsent
                 }
 
                 await insertCustomerBureau(bureau_data);//Insert new bureau data
