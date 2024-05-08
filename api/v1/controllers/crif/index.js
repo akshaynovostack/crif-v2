@@ -7,16 +7,16 @@ const { apiResponse } = require("../../../helpers/response/response.js");
 const { getUserDetailsWithBureau } = require("../../../models/customers.js");
 const { initiate, response } = require("../../../services/crifService.js");
 const moment = require("moment");
-const { insertCustomerBureau, updateBureauDataByCustomerIdAndVendor } = require("../../../services/customerBureauService.js");
+const { insertCustomerBureau, updateBureauDataByCustomerIdAndVendor, deleteConsentByCustomerIdAndVendor } = require("../../../services/customerBureauService.js");
 const { logger } = require("../../../helpers/logger/index.js");
 const ResHelper = require(_pathconst.FilesPath.ResHelper);
 
 exports.getReport = async (req, res, next) => {
     try {
         let { customer_id, consent, user_answer, refresh_report } = req.body;
-        logger.log({ level: 'info', message: req.body });
-        
-        let hasConsent =0;
+        logger.log({ level: 'info', message: { type: "crif_fetch_report", data: req.body } });
+
+        let hasConsent = 0;
 
         if (consent == "Y") {
             hasConsent == 1
@@ -68,12 +68,12 @@ exports.getReport = async (req, res, next) => {
                         customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: hasConsent
                     }
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, bureau_data)
-                }else if(bureau_data && bureau_data.status== bureauStatus['report_generated']){
+                } else if (bureau_data && bureau_data.status == bureauStatus['report_generated']) {
                     return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', refresh_enable: hasExpired ? true : false, created_at: bureau_data.created_at, data: bureau_data.report_data }, "");
                 }
             } else {
                 bureau_data = {
-                    bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent:hasConsent
+                    bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: hasConsent
                 }
 
                 await insertCustomerBureau(bureau_data);//Insert new bureau data
@@ -135,8 +135,8 @@ exports.getReport = async (req, res, next) => {
 
                     let finalData = await generateReport(step2, permanent_account_number);//to get the report and desctruct the data
                     let { credit_score, monthly_obligations, outstanding_obligations } = finalData.meta_data || {}
-                    
-                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, {report_data: finalData, credit_score: String(credit_score), monthly_obligations: String(monthly_obligations), outstanding_obligations: String(outstanding_obligations), report_url: finalData?.report_url, status: bureauStatus['report_generated'], created_at: new Date().toISOString() }); //Auto Authentication – Confident match from Bureau.
+
+                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { report_data: finalData, credit_score: String(credit_score), monthly_obligations: String(monthly_obligations), outstanding_obligations: String(outstanding_obligations), report_url: finalData?.report_url, status: bureauStatus['report_generated'], created_at: new Date().toISOString() }); //Auto Authentication – Confident match from Bureau.
 
                     return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', refresh_enable: false, created_at: new Date().toISOString(), data: finalData }, "");
 
@@ -150,6 +150,22 @@ exports.getReport = async (req, res, next) => {
         } else {
             return ResHelper.apiResponse(res, false, "No record found for this user.", 401, { status: 'failed', data: {} }, "");
         }
+    }
+    catch (e) {
+        let data = catchError(e);
+        logger.log({ level: 'error', message: data });
+        apiResponse(res, false, data.message, data.status, { status: 'failed', data: data.data || {} }, "");
+    }
+}
+exports.withDrawConsent = async (req, res, next) => {
+    try {
+        let { customer_id } = req.params;
+        logger.log({ level: 'info', message: { type: "crif_consent_withdraw", customer_id } });
+
+        let deleteCount = await deleteConsentByCustomerIdAndVendor(activeBureauPartner, customer_id)
+        console.log(deleteCount);
+        return ResHelper.apiResponse(res, true, deleteCount ? "Success" : "No bureau data found for this customer", 200, {}, "");
+
     }
     catch (e) {
         let data = catchError(e);

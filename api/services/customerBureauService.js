@@ -28,5 +28,18 @@ async function updateBureauDataByCustomerIdAndVendor(vendor, customerId, newData
         throw error;
     }
 }
+async function deleteConsentByCustomerIdAndVendor(vendor, customerId) {
+    try {
+        // Update bureau records associated with the customer ID and vendor
+        const updatedRecords = await CustomerBureau.query().delete()
+            .where('customer_id', customerId)
+            .where('vendor', vendor);
 
-module.exports = { insertCustomerBureau, updateBureauDataByCustomerIdAndVendor };
+        return updatedRecords;
+    } catch (error) {
+        console.error('Error updating bureau data by customer ID and vendor:', error);
+        throw error;
+    }
+}
+
+module.exports = { insertCustomerBureau, updateBureauDataByCustomerIdAndVendor, deleteConsentByCustomerIdAndVendor };
