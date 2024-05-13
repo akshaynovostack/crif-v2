@@ -60,7 +60,7 @@ app.use(function (req, res, next) {
 
 
 // app.use('/v1', require(_pathconst.FilesPath.V1Routes));// For version 1
-app.use('/v2', require(_pathconst.FilesPath.V2Routes));// For version 2
+app.use('/v1', require(_pathconst.FilesPath.V1Routes));// For version 2
 
 // require(_pathconst.FilesPath.V2Routes)(app, validator)
 // catch 404 and forward to error handler

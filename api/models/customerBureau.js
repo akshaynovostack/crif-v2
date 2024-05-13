@@ -24,8 +24,10 @@ class CustomerBureau extends Model {
                 outstanding_obligations: { type: 'string', maxLength: 50 },
                 monthly_obligations: { type: 'string', maxLength: 50 },
                 report_xml: { type: 'string' }, //  report_xml is a string
+                report_data: { type: 'object' }, // You can specify JSON schema for the JSON field
                 report_url: { type: 'string' }, //report_url is a string
                 status: { type: 'integer' }, //  status is a string enum
+                consent: { type: 'integer' }, //  status is a string enum
                 created_at: { type: 'string', format: 'date-time' },
                 updated_at: { type: 'string', format: 'date-time' },
             },

@@ -1,7 +1,5 @@
 const { Model } = require('objection');
-const Knex = require('knex');
-const customer = require('./customerBureau');
-const { Customer } = require('./Customers');
+const { Customer } = require('./customers');
 Model.knex(knexSqlDb);
 
 // 5. Define the Customer model:
