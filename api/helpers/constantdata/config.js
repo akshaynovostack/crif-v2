@@ -21,9 +21,6 @@ exports.customShortnerBasePath = process.env.CUSTOMER_SHORTNER_BASE_PATH;
 exports.customShortnerApiKey = process.env.CUSTOMER_SHORTNER_API_KEY;
 
 
-exports.falseSightApiKey = process.env.FALSE_SIGHT_API_KEY ? process.env.FALSE_SIGHT_API_KEY : "kjbasdbakdb";
-exports.falseSightApiUrl = process.env.FALSE_SIGHT_BASE_URL ? process.env.FALSE_SIGHT_BASE_URL : "https://falsesight.com/api/";
-
 exports.environment = environment;
 
 exports.activeBureauPartner = process.env.ACTIVE_BUREAU_PARTNER ? process.env.ACTIVE_BUREAU_PARTNER : "crif";
