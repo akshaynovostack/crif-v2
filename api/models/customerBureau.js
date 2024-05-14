@@ -26,6 +26,7 @@ class CustomerBureau extends Model {
                 report_xml: { type: 'string' }, //  report_xml is a string
                 report_data: { type: 'object' }, // You can specify JSON schema for the JSON field
                 report_url: { type: 'string' }, //report_url is a string
+                report_enc: { type: 'string' }, //Encrypted repory of the customer is a string
                 status: { type: 'integer' }, //  status is a string enum
                 consent: { type: 'integer' }, //  status is a string enum
                 created_at: { type: 'string', format: 'date-time' },

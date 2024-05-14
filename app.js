@@ -6,6 +6,7 @@ global.appRoot = path.resolve(__dirname)
 let bodyParser = require('body-parser')
 let session = require('express-session');
 const { logger } = require('./api/helpers/logger/index.js');
+const { encryptAes256, decryptAes256 } = require('./api/helpers/crypto/index.js');
 let validator = require('express-joi-validation')({
   passError: true // NOTE: this tells the module to pass the error along for you
 });
@@ -61,7 +62,6 @@ app.use(function (req, res, next) {
 
 // app.use('/v1', require(_pathconst.FilesPath.V1Routes));// For version 1
 app.use('/v1', require(_pathconst.FilesPath.V1Routes));// For version 2
-
 // require(_pathconst.FilesPath.V2Routes)(app, validator)
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
@@ -69,6 +69,9 @@ app.use('/v1', require(_pathconst.FilesPath.V1Routes));// For version 2
 // })
 // After your routes add a standard express error handler. This will be passed the Joi
 // error, plus an extra "type" field so we can tell what type of validation failed
+
+// Example usage
+
 app.use((err, req, res, next) => {
   if (err.error.isJoi) {
     let errDetail = []

@@ -14,6 +14,7 @@ exports.up = function (knex) {
         table.text("report_xml").comment('Report of the Borrower');
         table.json("report_data").comment('Report data of the Borrower');
         table.text("report_url").comment('This Column will store the final report');
+        table.text("report_enc").comment('encrypted report of the customer');
         table.integer('status').comment('"failed": "0","pending": "1","initiated": "2","authenticated": "3","questinare": "4","questinare_success": "5","report_generated": "6"  ').defaultTo(0);
         table.integer('consent').comment('"false": "0","true": "1"').defaultTo(0);
         table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));

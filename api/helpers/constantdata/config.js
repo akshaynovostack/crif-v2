@@ -1,4 +1,6 @@
 let environment = process.env.ENV ? process.env.ENV : "development";
+let { SECRET_KEY, SECRET_IV } = process.env;
+
 exports.TOKEN_SECRET = process.env.TOKEN_SECRET;//sample secret  "LowRate!@#$%^&*()";
 
 
@@ -19,6 +21,9 @@ exports.s3secretAccessKey = process.env.S3_SECRET_ACCESS_KEY;
 exports.bitlyAccessToken = process.env.BITLY_ACCESS_TOKEN;
 exports.customShortnerBasePath = process.env.CUSTOMER_SHORTNER_BASE_PATH;
 exports.customShortnerApiKey = process.env.CUSTOMER_SHORTNER_API_KEY;
+
+exports.SECRET_KEY = SECRET_KEY ? SECRET_KEY : '3d24893d7bf95dc05c98e3f1420d6e55bb248c1d6671f58d8dd6f7aa9abcefe7';
+exports.SECRET_IV = SECRET_IV ? SECRET_IV : '3f7c3f9aa7a3b276dd6f429cf25352e1';
 
 
 exports.environment = environment;

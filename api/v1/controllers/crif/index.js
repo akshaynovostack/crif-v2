@@ -5,11 +5,12 @@ const { getAccessCode } = require("../../../helpers/crif/auth.js");
 const { catchError } = require("../../../helpers/error/axios.js");
 const { apiResponse } = require("../../../helpers/response/response.js");
 const { getUserDetailsWithBureau } = require("../../../models/customers.js");
-const { initiate, response } = require("../../../services/crifService.js");
+const { initiate } = require("../../../services/crifService.js");
 const moment = require("moment");
 const { insertCustomerBureau, updateBureauDataByCustomerIdAndVendor, deleteConsentByCustomerIdAndVendor } = require("../../../services/customerBureauService.js");
 const { logger } = require("../../../helpers/logger/index.js");
 const { insertCustomerConsent } = require("../../../services/customerConsentsService.js");
+const { encryptAes256, decryptAes256, decodeFromBase64, encodeToBase64 } = require("../../../helpers/crypto/index.js");
 const ResHelper = require(_pathconst.FilesPath.ResHelper);
 
 exports.getReport = async (req, res, next) => {
@@ -20,6 +21,7 @@ exports.getReport = async (req, res, next) => {
         let hasConsent = 0;
 
         if (consent == "Y") {
+            await insertCustomerConsent({ user_type: "customer", user_id: customer_id, service_type: 'bureau', consent_type: 'crif_fetch_report', description: "Consent given by customer to fetch the report" })//insert the consent of the customer            
             hasConsent == 1
         } else {
             return ResHelper.apiResponse(res, false, "Please provide the consent", 400, { status: 'failed', data: {} }, "");
@@ -70,15 +72,14 @@ exports.getReport = async (req, res, next) => {
                     }
                     await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, bureau_data)
                 } else if (bureau_data && bureau_data.status == bureauStatus['report_generated']) {
-                    return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', refresh_enable: hasExpired ? true : false, created_at: bureau_data.created_at, data: bureau_data.report_data }, "");
+                    return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', refresh_enable: hasExpired ? true : false, created_at: bureau_data.created_at, data: JSON.parse(decodeFromBase64(bureau_data.report_enc)) }, "");
                 }
             } else {
                 bureau_data = {
                     bureau_id: bureauId, customer_id, vendor: activeBureauPartner, order_id: orderId, status: bureauStatus['pending'], access_code: accessCode, report_id: '', credit_score: "", outstanding_obligations: "", monthly_obligations: "", report_xml: "", report_url: "", consent: hasConsent
                 }
-                await insertCustomerBureau(bureau_data);//Insert new bureau data
+                await insertCustomerBureau(bureau_data);//Insert new bureau data 
             }
-            await insertCustomerConsent({ customer_id, service_type: 'bureau', consent_type: 'crif_fetch_report', description: "Consent given by customer" })
 
             let dataString = `${first_name ? first_name : ""}|${middle_name ? middle_name : ""}|${last_name ? last_name : ""}|${gender || ""}|${dob}|||${customer_mobile_number}|||${email_address}||${permanent_account_number ? permanent_account_number : ""}||||||||${father_name || ""}|||${address_1}|${village_1}|${city_1}|${state_1}|${pin_1}|${country_1}|||||||${crifCustomerId}|${crifProductId}|${consent}|`; //This is the data string we need to send to crif
             let initiateOrder = await initiate(dataString, orderId, accessCode); //Initiate the orde at crif end
@@ -137,7 +138,7 @@ exports.getReport = async (req, res, next) => {
                     let finalData = await generateReport(step2, permanent_account_number);//to get the report and desctruct the data
                     let { credit_score, monthly_obligations, outstanding_obligations } = finalData.meta_data || {}
 
-                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { report_data: finalData, credit_score: String(credit_score), monthly_obligations: String(monthly_obligations), outstanding_obligations: String(outstanding_obligations), report_url: finalData?.report_url, status: bureauStatus['report_generated'], created_at: new Date().toISOString() }); //Auto Authentication – Confident match from Bureau.
+                    await updateBureauDataByCustomerIdAndVendor(activeBureauPartner, customer_id, { report_data: {}, report_enc: encodeToBase64(JSON.stringify(finalData)), credit_score: String(credit_score), monthly_obligations: String(monthly_obligations), outstanding_obligations: String(outstanding_obligations), report_url: finalData?.report_url, status: bureauStatus['report_generated'], created_at: new Date().toISOString() }); //Auto Authentication – Confident match from Bureau.
 
                     return ResHelper.apiResponse(res, true, "Success", 200, { status: 'report_generated', refresh_enable: false, created_at: new Date().toISOString(), data: finalData }, "");
 
